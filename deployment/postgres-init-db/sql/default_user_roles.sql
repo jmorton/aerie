@@ -1,13 +1,13 @@
 -- Default Roles:
-insert into permissions.user_roles(role) values ('aerie_admin'), ('user'), ('viewer');
+insert into permissions.user_roles(role) values ('1-aerie_admin'), ('2-user'), ('3-viewer');
 
 -- Permissions For Default Roles:
--- 'aerie_admin' permissions aren't specified since 'aerie_admin' is always considered to have "NO_CHECK" permissions
+-- '1-aerie_admin' permissions aren't specified since '1-aerie_admin' is always considered to have "NO_CHECK" permissions
 update permissions.user_role_permission
 set action_permissions = '{}',
     function_permissions = '{}',
     workspace_permissions = '{}'
-where role = 'aerie_admin';
+where role = '1-aerie_admin';
 
 update permissions.user_role_permission
 set action_permissions = '{
@@ -56,7 +56,7 @@ set action_permissions = '{
       "read_file_directory": "NO_CHECK",
       "write_file_directory": "OWNER_COLLABORATOR"
     }'
-where role = 'user';
+where role = '2-user';
 
 update permissions.user_role_permission
 set action_permissions = '{
@@ -72,9 +72,9 @@ set action_permissions = '{
       "list_workspace_contents": "NO_CHECK",
       "read_file_directory": "NO_CHECK"
     }'
-where role = 'viewer';
+where role = '3-viewer';
 
 -- Default Users:
 insert into permissions.users(username, default_role)
-  values ('Mission Model', 'viewer'),
-         ('Aerie Legacy', 'viewer');
+  values ('Mission Model', '3-viewer'),
+         ('Aerie Legacy', '3-viewer');
